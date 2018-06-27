@@ -1,0 +1,42 @@
+const CodexRecord = artifacts.require('./CodexRecord.sol')
+const CodexRecordProxy = artifacts.require('./CodexRecordProxy.sol')
+const CodexStakeContainer = artifacts.require('./CodexStakeContainer.sol')
+
+module.exports = async (deployer, network, accounts) => {
+
+  deployer
+    .then(async () => {
+      const newOwner = accounts[1]
+
+      // Transfer ownership of CodexStakeContainer
+      const stakeContainer = await CodexStakeContainer.deployed()
+      await stakeContainer.initializeOwnable(newOwner)
+
+      // Transfer ownership of CodexRecord from the perspective of CodexRecordProxy.
+      // Initialization of this storage slot has already taken place earlier in migration
+      //  because some operations (like setting the tokenURI) require owner permissions.
+      const codexRecordProxy = await CodexRecordProxy.deployed()
+      const proxiedCodexRecord = CodexRecord.at(codexRecordProxy.address)
+
+      console.log('Transferring proxiedCodexRecord ownership to', newOwner)
+      await proxiedCodexRecord.transferOwnership(newOwner)
+
+      // For security, let's initialize the ownership of CodexRecord to newOwner as well.
+      // This is a defensive action because no one should ever be interacting with CodexRecord
+      //  directly, they should always be going through CodexRecordProxy.
+      const codexRecord = await CodexRecord.deployed()
+      console.log('Transferring codexRecord ownership to', newOwner)
+      await codexRecord.initializeOwnable(newOwner)
+
+      // Finally, transfer ownership of CodexRecordProxy from deployer to newOwner.
+      // This is a crucial step in the process because the owner of CodexRecordProxy is the one
+      //  that dictates future upgrades.
+      console.log('Transferring codexRecordProxy proxy ownership to', newOwner)
+      await codexRecordProxy.transferProxyOwnership(newOwner)
+    })
+    .catch((error) => {
+      console.error(error)
+
+      throw error
+    })
+}

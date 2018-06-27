@@ -1,0 +1,33 @@
+{
+  "name": "contract.codex-registry",
+  "version": "1.0.0",
+  "description": "Contracts for Codex Protocol's Codex Registry",
+  "scripts": {
+    "clean": "rm -rf build",
+    "migrate": "npm run lint && truffle migrate --network ganache",
+    "migrate:reset": "npm run clean && npm run lint && truffle migrate --reset --network ganache",
+    "lint": "solium -d .",
+    "compile": "truffle compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codex-protocol/contract.codex-registry"
+  },
+  "keywords": [
+    "codex"
+  ],
+  "author": "Codex Protocol <contact@codexprotocol.com>",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/codex-protocol/contract.codex-registry/issues"
+  },
+  "homepage": "https://github.com/codex-protocol/contract.codex-registry",
+  "devDependencies": {
+    "ganache-cli": "^6.1.0",
+    "solc": "0.4.24",
+    "solium": "^1.1.7"
+  },
+  "dependencies": {
+    "truffle": "4.1.11"
+  }
+}
