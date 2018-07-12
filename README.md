@@ -28,7 +28,7 @@ If you find a critical bug that would compromise the integrity of the deployed c
 For the contracts deployed to the Rinkeby network, there will be 2 phases.
 
 - Phase 1: No fees or staking. At this point, the fees for the ERC-721 smart contract are turned off and all operations on the protocol are fee (minus gas costs). Phase 1 will take place from these dates: June 27th at 12:01am CST to July 11th at 9:00am CST.
-- Phase 2: Fees and staking are turned on. This means all operations on the ERC-721 smart contract now require fees in the form of the CodexCoin (the Codex Protocol ERC-20 token, denoted as CODX). Phase 2 will start as soon as Phase 1 ends, and will end on July 2nd at 11:59pm CST.
+- Phase 2: Fees and staking are turned on. This means all operations on the ERC-721 smart contract now require fees in the form of the CodexCoin (the Codex Protocol ERC-20 token, denoted as CODX). Phase 2 will start as soon as Phase 1 ends, and will end on July 22nd at 11:59pm CST.
 
 Prior to Phase 2 going live in Rinkeby we'll expose faucet functionality within Codex Viewer to obtain CODX tokens.
 
